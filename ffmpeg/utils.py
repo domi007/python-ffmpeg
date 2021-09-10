@@ -27,7 +27,7 @@ def build_options(options):
 def build_bandwidths(bandwidths):
     arguments = []
 
-    for key, value in options.items():
+    for key, value in bandwidths.items():
         if key.startswith('-'):
             key = key[1:]
 
