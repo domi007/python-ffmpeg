@@ -6,7 +6,7 @@ import sys
 from collections import namedtuple
 from pyee import EventEmitter
 
-from .utils import build_options, parse_progress, readlines
+from .utils import build_options, build_bandwidths, parse_progress, readlines
 
 _windows = (sys.platform == 'win32')
 
