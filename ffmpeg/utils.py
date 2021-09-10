@@ -24,6 +24,21 @@ def build_options(options):
 
     return arguments
 
+def build_bandwidths(bandwidths):
+    arguments = []
+
+    for key, value in options.items():
+        if key.startswith('-'):
+            key = key[1:]
+
+        argument = ['-{key}'.format(key=key)]
+        if value is not None:
+            argument[0] = argument[0] + ":" + str(value))
+
+        arguments.extend(argument)
+
+    return arguments
+
 
 async def readlines(stream):
     pattern = re.compile(br'[\r\n]+')

@@ -137,7 +137,7 @@ class FFmpeg(EventEmitter):
             arguments.extend(build_options({'map': mapping}))
 
         for bandwidth in self._bandwidths:
-            arguments.extend(build_options({'b': bandwidth}))
+            arguments.extend(build_bandwidths({'b': bandwidth}))
 
         for file in self._output_files:
             arguments.extend(build_options(file.options))
