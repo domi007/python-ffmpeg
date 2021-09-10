@@ -33,7 +33,9 @@ def build_bandwidths(bandwidths):
 
         argument = ['-{key}'.format(key=key)]
         if value is not None:
-            argument[0] = argument[0] + ":" + str(value))
+            stream_identifier,bw_value = value.split(" ")
+            argument[0] = argument[0] + ":" + str(stream_identifier))
+            argument.append(str(bw_value))
 
         arguments.extend(argument)
 
