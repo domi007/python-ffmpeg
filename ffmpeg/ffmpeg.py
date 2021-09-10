@@ -34,6 +34,7 @@ class FFmpeg(EventEmitter):
         self._global_options = {}
         self._input_files = []
         self._mappings = []
+        self._bandwidths = []
         self._output_files = []
 
         self._executed = False
@@ -55,6 +56,10 @@ class FFmpeg(EventEmitter):
 
     def map(self, value):
         self._mappings.append(value)
+        return self
+
+    def b(self, value):
+        self._bandwidths.append(value)
         return self
 
     def output(self, url, options=None, **kwargs):
@@ -130,6 +135,9 @@ class FFmpeg(EventEmitter):
 
         for mapping in self._mappings:
             arguments.extend(build_options({'map': mapping}))
+
+        for bandwidth in self._bandwidths:
+            arguments.extend(build_options({'b': bandwidth}))
 
         for file in self._output_files:
             arguments.extend(build_options(file.options))
