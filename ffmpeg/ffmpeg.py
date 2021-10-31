@@ -117,7 +117,7 @@ class FFmpeg(EventEmitter):
         self._process.stdin.write_eof()
 
     async def _read_stderr(self):
-        if self._process is None or self._process.stdin is None:
+        if self._process is None:
             return
         async for line in readlines(self._process.stderr):
             self.emit('stderr', line.decode('utf-8'))
