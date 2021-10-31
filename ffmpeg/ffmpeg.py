@@ -97,7 +97,7 @@ class FFmpeg(EventEmitter):
             self.emit('error', self._process.returncode)
 
     def terminate(self):
-        if not self._executed:
+        if not self._executed or self._process is None:
             raise FFmpegError('FFmpeg is not executed')
 
         sigterm = signal.SIGTERM
@@ -109,7 +109,7 @@ class FFmpeg(EventEmitter):
         self._process.send_signal(sigterm)
 
     async def _write_stdin(self, stream):
-        if not stream:
+        if not stream or self._process is None or self._process.stdin is None:
             return
 
         while not stream.at_eof():
@@ -117,6 +117,8 @@ class FFmpeg(EventEmitter):
         self._process.stdin.write_eof()
 
     async def _read_stderr(self):
+        if self._process is None or self._process.stdin is None:
+            return
         async for line in readlines(self._process.stderr):
             self.emit('stderr', line.decode('utf-8'))
 
